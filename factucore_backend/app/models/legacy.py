@@ -39,11 +39,12 @@ class Cliente(SQLModel, table=True):
     __tablename__ = "cliente"
 
     idCliente: int | None = Field(default=None, primary_key=True)
-    cedula: str = Field(max_length=13)
+    cedula: str = Field(sa_column=Column(String(13), unique=True, nullable=False))
     cli_nombre: str = Field(max_length=80)
-    fono: str = Field(max_length=25)
-    direccion: str = Field(max_length=55)
-    c_descripcion: str = Field(max_length=45)
+    cli_apellido: str = Field(max_length=80)
+    cli_telefono: str = Field(max_length=25)
+    cli_direccion: str = Field(max_length=55)
+    cli_descripcion: str = Field(max_length=45)
     cli_mail: str = Field(max_length=45)
 
     facturas: list["Factura"] = Relationship(back_populates="cliente")
