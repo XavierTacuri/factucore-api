@@ -1,4 +1,4 @@
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 from .common import ORMModel
 
@@ -16,15 +16,12 @@ class UserCreate(ORMModel):
 
 
 class UserUpdate(ORMModel):
-    userCedula: str | None = None
+    model_config = ConfigDict(from_attributes=True, extra="forbid")
+
     userNombre: str | None = None
     userApellido: str | None = None
     userFono: str | None = None
     userDireccion: str | None = None
-    userMail: str | None = None
-    userUsuario: str | None = None
-    password: str | None = Field(default=None, min_length=8)
-    idRol: int | None = None
     userEstado: bool | None = None
 
 
