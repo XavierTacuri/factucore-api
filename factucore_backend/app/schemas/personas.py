@@ -38,6 +38,7 @@ class UsuarioBase(ORMModel):
     userUsuario: str
     userEstado: bool | None = True
     userPrincipal: bool | None = False
+    idRol: int
 
 
 class UsuarioCreate(UsuarioBase):
@@ -56,6 +57,7 @@ class UsuarioUpdate(ORMModel):
     userClave: str | None = None
     userEstado: bool | None = None
     userPrincipal: bool | None = None
+    idRol: int | None = None
 
 
 class UsuarioRead(UsuarioBase):

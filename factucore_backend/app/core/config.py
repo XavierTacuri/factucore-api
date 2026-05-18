@@ -19,6 +19,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str | None = Field(default=None)
 
     SECRET_KEY: str = "change-me"
+    ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
     BACKEND_CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
 

@@ -5,8 +5,10 @@ description = "Backend FastAPI para migrar el sistema de facturacion legacy."
 requires-python = ">=3.11"
 dependencies = [
     "alembic>=1.13.2",
+    "bcrypt==4.0.1",
     "email-validator>=2.2.0",
     "fastapi>=0.111.0",
+    "passlib[bcrypt]>=1.7.4",
     "psycopg[binary]>=3.2.0",
     "pydantic-settings>=2.3.4",
     "python-jose[cryptography]>=3.3.0",

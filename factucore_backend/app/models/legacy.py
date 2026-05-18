@@ -1,6 +1,6 @@
 from datetime import date
 
-from sqlalchemy import Column, ForeignKey
+from sqlalchemy import Column, ForeignKey, String
 from sqlmodel import Field, Relationship, SQLModel
 
 
@@ -50,6 +50,17 @@ class Cliente(SQLModel, table=True):
     ordenes_trabajo: list["OrdenTrabajo"] = Relationship(back_populates="cliente")
 
 
+class Rol(SQLModel, table=True):
+    __tablename__ = "rol"
+
+    idRol: int | None = Field(default=None, primary_key=True)
+    rolNombre: str = Field(sa_column=Column(String(30), unique=True, nullable=False))
+    rolDescripcion: str | None = Field(default=None, max_length=100)
+    rolEstado: bool = True
+
+    usuarios: list["Usuario"] = Relationship(back_populates="rol")
+
+
 class Usuario(SQLModel, table=True):
     __tablename__ = "usuario"
 
@@ -62,10 +73,12 @@ class Usuario(SQLModel, table=True):
     userFecha: str = Field(max_length=12)
     userMail: str = Field(max_length=45)
     userUsuario: str = Field(max_length=15)
-    userClave: str = Field(max_length=50)
+    userClave: str = Field(max_length=255)
     userEstado: bool | None = None
     userPrincipal: bool | None = None
+    idRol: int = Field(foreign_key="rol.idRol")
 
+    rol: Rol = Relationship(back_populates="usuarios")
     facturas: list["Factura"] = Relationship(back_populates="usuario")
     ordenes_trabajo: list["OrdenTrabajo"] = Relationship(back_populates="usuario")
 
